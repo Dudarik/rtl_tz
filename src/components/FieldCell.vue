@@ -55,7 +55,6 @@ const props = defineProps<IProps>();
     align-items: center;
     justify-content: center;
 
-    // width: 1.5rem;
     padding: 0 0.3rem;
 
     height: 1.5rem;

@@ -10,7 +10,6 @@ interface IProps {
   isVisible: boolean;
 }
 
-// const { cardBackgroundColor, isVisible, cardCount } = defineProps<IProps>();
 const props = defineProps<IProps>();
 const emit = defineEmits<{
   (e: 'close'): void;

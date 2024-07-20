@@ -29,8 +29,6 @@ const props = defineProps<IProps>();
   right: -0.5rem;
 
   .card-copy_2 {
-    // position: relative;
-
     height: 100%;
 
     backdrop-filter: blur(5px);

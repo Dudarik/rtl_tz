@@ -63,8 +63,8 @@ const props = defineProps<IProps>();
 
     height: 1.5rem;
 
-    bottom: -1px;
-    right: -1px;
+    bottom: 0;
+    right: 0;
 
     background-color: #262626;
 

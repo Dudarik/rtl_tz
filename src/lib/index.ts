@@ -1,4 +1,4 @@
-import { Ref, ref } from 'vue';
+import { Ref } from 'vue';
 import { ICard } from '../interfaces';
 import { CARD_COLORS, deafultCard, LS_KEY_SAVE_STATE } from '../config';
 
@@ -9,17 +9,15 @@ const getRandomColor = (colors: (string | null)[]) =>
   colors[getRandomNumber(0, colors.length - 1)];
 
 export const useCards = (cardColors = CARD_COLORS) => {
-  return ref<ICard[]>(
-    new Array(25).fill(1).map((_, id) => {
-      const color = getRandomColor(cardColors);
-      return {
-        id,
-        color,
-        count: getRandomNumber(1, 100),
-        dragable: !!color || false,
-      };
-    })
-  );
+  return new Array(25).fill(1).map((_, id) => {
+    const color = getRandomColor(cardColors);
+    return {
+      id,
+      color,
+      count: getRandomNumber(1, 100),
+      dragable: !!color || false,
+    };
+  });
 };
 
 export const getSelectedCard = (event: Event, cards: Ref<ICard[]>) => {

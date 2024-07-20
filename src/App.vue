@@ -81,13 +81,31 @@ const onDrop = (event: DragEvent) => {
   saveStateToLS(cards.value);
 };
 
+const onClickGenNewBoard = () => {
+  cards.value = useCards();
+  saveStateToLS(cards.value);
+};
+
+const onClickSortBoard = () => {
+  const tArr = [...cards.value]
+    .filter((card) => card.color)
+    //@ts-ignore
+    .sort((a, b) => a.color.localeCompare(b.color))
+    .map((card, index) => ({ ...card, id: index }));
+
+  for (let i = tArr.length; i < cards.value.length; i++)
+    tArr.push({ ...deafultCard, id: i });
+
+  cards.value = tArr;
+};
+
 onMounted(() => {
   const stateFromLS = loadStateFromLS();
   if (stateFromLS) {
     cards.value = stateFromLS;
     return;
   }
-  cards = useCards();
+  cards.value = useCards();
   saveStateToLS(cards.value);
 });
 </script>
@@ -113,8 +131,12 @@ onMounted(() => {
         <Skeleton width="8rem" height="1rem" style="margin-top: 1rem" />
       </div>
       <div class="control-btns">
-        <button>Генереровать</button>
-        <button>Сортировать</button>
+        <button class="service-btn" @click="onClickGenNewBoard">
+          Генереровать
+        </button>
+        <button class="service-btn" @click="onClickSortBoard">
+          Сортировать
+        </button>
       </div>
     </Substrate>
     <div
@@ -161,6 +183,16 @@ onMounted(() => {
     align-items: center;
     flex-direction: column;
     gap: 1rem;
+
+    .control-btns {
+      display: flex;
+      gap: 1rem;
+      .service-btn {
+        cursor: pointer;
+        padding: 0.3rem;
+        margin-top: 1rem;
+      }
+    }
 
     .profile-image_wrapper {
       position: relative;

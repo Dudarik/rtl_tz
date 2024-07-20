@@ -119,6 +119,9 @@ const onDrop = (event: DragEvent) => {
         @click.stop
       />
     </div>
+    <Substrate closeButton class="tip">
+      <Skeleton width="90%" height="3rem" borderRadius=".5rem" />
+    </Substrate>
   </div>
 </template>
 
@@ -128,6 +131,8 @@ const onDrop = (event: DragEvent) => {
   display: flex;
   gap: 1rem;
   padding: 1rem;
+
+  flex-wrap: wrap;
 
   .profile {
     display: flex;
@@ -191,6 +196,11 @@ const onDrop = (event: DragEvent) => {
     grid-template-columns: repeat(5, 1fr);
 
     overflow: hidden;
+  }
+
+  .tip {
+    width: 71.5rem;
+    height: 5rem;
   }
 }
 </style>

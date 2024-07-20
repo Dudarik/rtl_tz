@@ -34,6 +34,37 @@ const onCloseDialog = () => {
   selectedCard.value = deafultCard;
   isOpenModal.value = false;
 };
+
+const startDrag = (event: DragEvent) => {
+  console.log('startDrag', event);
+  selectedCard.value = getSelectedCard(event, cards);
+};
+
+const onDrop = (event: DragEvent) => {
+  const key = event.target.closest('.card_cell').dataset.key;
+  console.log('onDrop', key, selectedCard.value.id);
+
+  if (parseInt(key) === selectedCard.value.id) return;
+
+  if (
+    cards.value[key].color !== null &&
+    cards.value[key].color !== selectedCard.value.color
+  )
+    return;
+
+  if (cards.value[key].color === selectedCard.value.color) {
+    cards.value[key].count += selectedCard.value.count;
+  }
+
+  if (cards.value[key].color === null)
+    cards.value[key] = { ...selectedCard.value, id: parseInt(key) };
+
+  cards.value[selectedCard.value.id] = {
+    ...deafultCard,
+    id: selectedCard.value.id,
+  };
+  console.log(cards.value);
+};
 </script>
 
 <template>
@@ -55,7 +86,14 @@ const onCloseDialog = () => {
       <Skeleton width="8rem" height=".7rem" />
       <Skeleton width="5rem" height=".7rem" style="margin-top: 1rem" />
     </Substrate>
-    <div class="card_board" @click="onClickBoard">
+    <div
+      class="card_board"
+      @click="onClickBoard"
+      @drop="onDrop"
+      @dragstart.stop="startDrag"
+      @dragover.prevent
+      @dragenter.prevent
+    >
       <FieldCell
         v-for="card in cards"
         :cardBackgroundColor="card.color"

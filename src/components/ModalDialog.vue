@@ -21,30 +21,24 @@ const isDelete = ref(false);
 const deleteCount = ref(0);
 
 const onClose = () => {
-  console.log('close Dialog');
   isDelete.value = false;
   emit('close');
 };
 
 const onDeleteItem = () => {
-  console.log('onDeleteItem', props.card.color, props.card.count);
   isDelete.value = true;
 };
 
 const onConfirmDelete = () => {
-  console.log('onConfirmDelete', deleteCount.value);
   emit('confirmDelete', deleteCount.value);
   emit('close');
 };
 
 const onCancelDelete = () => {
-  console.log('onCancelDelete');
   isDelete.value = false;
 };
 
 const onChangeDeleteCount = () => {
-  // if (typeof deleteCount.value !== 'number') deleteCount.value = 0;
-  console.log(deleteCount.value, props.card.count, props.card.color);
   if (deleteCount.value > props.card.count)
     deleteCount.value = props.card.count;
 

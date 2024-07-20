@@ -14,4 +14,4 @@
 - Сортировка карточек.
 - При событии Drop, если цвета совпадают, количество карточек суммируется.
 
-[Деплой на Netlify](https://669b656eec49539bc5b32fbc--musical-alpaca-7e865e.netlify.app/)
+[Деплой на Netlify](https://669b6b1959d01599cf60b2d7--rtltz.netlify.app/)

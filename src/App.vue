@@ -81,6 +81,7 @@ const onDrop = (event: DragEvent) => {
     id: selectedCard.value.id,
   };
   selectedCard.value = { ...deafultCard };
+  isOpenModal.value = false;
 
   saveStateToLS(cards.value);
 };

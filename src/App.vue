@@ -58,7 +58,10 @@ const onDrop = (event: DragEvent) => {
 
   const cellId = parseInt(key);
 
-  if (parseInt(key) === selectedCard.value.id) return;
+  if (parseInt(key) === selectedCard.value.id) {
+    selectedCard.value = { ...deafultCard };
+    return;
+  }
 
   if (
     cards.value[cellId].color !== null &&
@@ -77,6 +80,7 @@ const onDrop = (event: DragEvent) => {
     ...deafultCard,
     id: selectedCard.value.id,
   };
+  selectedCard.value = { ...deafultCard };
 
   saveStateToLS(cards.value);
 };
@@ -149,6 +153,7 @@ onMounted(() => {
     >
       <FieldCell
         v-for="card in cards"
+        :class="{ selected: card.id === selectedCard.id }"
         :cardBackgroundColor="card.color"
         :cardCount="card.count"
         :key="card.id"

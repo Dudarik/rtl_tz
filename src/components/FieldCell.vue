@@ -33,6 +33,10 @@ const props = defineProps<IProps>();
 
   border: 1px solid #4d4d4d;
 
+  &.selected {
+    background-color: #2f2f2f;
+  }
+
   &:first-child {
     border-radius: 0.5rem 0 0 0;
   }
@@ -61,6 +65,8 @@ const props = defineProps<IProps>();
 
     bottom: -1px;
     right: -1px;
+
+    background-color: #262626;
 
     border-top: 1px solid #4d4d4d;
     border-left: 1px solid #4d4d4d;

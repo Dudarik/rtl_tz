@@ -85,13 +85,15 @@ const onDrop = (event: DragEvent) => {
           class="profile_image"
         />
       </div>
-      <Skeleton width="12rem" height="1.7rem" borderRadius=".5rem" />
-      <Skeleton width="10rem" height=".7rem" style="margin-top: 1rem" />
-      <Skeleton width="12rem" height=".7rem" />
-      <Skeleton width="10rem" height=".7rem" />
-      <Skeleton width="9rem" height=".7rem" />
-      <Skeleton width="8rem" height=".7rem" />
-      <Skeleton width="5rem" height=".7rem" style="margin-top: 1rem" />
+      <div class="user-info">
+        <Skeleton width="17rem" height="2rem" borderRadius=".5rem" />
+        <Skeleton width="16rem" height="1rem" style="margin-top: 1rem" />
+        <Skeleton width="17rem" height="1rem" />
+        <Skeleton width="15rem" height="1rem" />
+        <Skeleton width="14rem" height="1rem" />
+        <Skeleton width="11rem" height="1rem" />
+        <Skeleton width="8rem" height="1rem" style="margin-top: 1rem" />
+      </div>
     </Substrate>
     <div
       class="card_board"
@@ -140,8 +142,8 @@ const onDrop = (event: DragEvent) => {
       align-items: center;
       justify-content: center;
 
-      width: 13rem;
-      height: 15rem;
+      width: 18rem;
+      height: 22rem;
 
       overflow: hidden;
       //for safari
@@ -159,8 +161,8 @@ const onDrop = (event: DragEvent) => {
 
         background-color: transparent;
 
-        backdrop-filter: blur(5px);
-        -webkit-backdrop-filter: blur(5px);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
       }
 
       .profile_image {
@@ -168,6 +170,17 @@ const onDrop = (event: DragEvent) => {
         width: 100%;
         height: 100%;
       }
+    }
+    .user-info {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      flex-direction: column;
+
+      gap: 1.5rem;
+
+      margin-top: 1rem;
     }
   }
 

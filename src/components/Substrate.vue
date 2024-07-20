@@ -43,9 +43,11 @@ const onClickClose = () => {
   border: 1px solid $border-color;
 
   backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
 
   .close_btn {
     $btn-size: 2.5rem;
+    transform: scale(0.6);
 
     cursor: pointer;
 
@@ -55,7 +57,7 @@ const onClickClose = () => {
     align-items: center;
     justify-content: center;
 
-    background-color: $bg-color;
+    background-color: transparent;
 
     border: none;
     border-radius: $border-radius;
@@ -71,7 +73,7 @@ const onClickClose = () => {
     }
 
     &:hover > .line {
-      background-color: #9b59b6;
+      background-color: #1e99ab;
     }
 
     .line {

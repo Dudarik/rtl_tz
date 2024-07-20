@@ -1,3 +1,5 @@
+import { ICard } from '../interfaces';
+
 export const CARD_COLORS = [
   null,
   null,
@@ -7,3 +9,10 @@ export const CARD_COLORS = [
   '#AA9765',
   '#656CAA',
 ];
+
+export const deafultCard: ICard = {
+  id: -1,
+  color: null,
+  count: 0,
+  dragable: false,
+};

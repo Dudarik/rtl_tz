@@ -2,10 +2,38 @@
 import Skeleton from './components/Skeleton.vue';
 import Substrate from './components/Substrate.vue';
 import FieldCell from './components/FieldCell.vue';
+import ModalDialog from './components/ModalDialog.vue';
 
-import { useCards } from './lib';
+import { getSelectedCard, useCards } from './lib';
+import { deafultCard } from './config';
+import { ICard } from './interfaces';
+import { ref } from 'vue';
 
 const cards = useCards();
+
+const selectedCard = ref<ICard>(deafultCard);
+const isOpenModal = ref(false);
+
+const onClickBoard = (event: MouseEvent) => {
+  selectedCard.value = getSelectedCard(event, cards);
+  if (selectedCard.value.id !== -1) isOpenModal.value = true;
+  if (selectedCard.value.id === -1) isOpenModal.value = false;
+};
+
+const onConfirmDelete = (value: number) => {
+  const card = cards.value[selectedCard.value.id];
+  if (card.count <= value) {
+    cards.value[selectedCard.value.id] = { ...deafultCard, id: card.id };
+    return;
+  }
+  cards.value[selectedCard.value.id].count -= value;
+};
+
+const onCloseDialog = () => {
+  console.log('onCloseDilog');
+  selectedCard.value = deafultCard;
+  isOpenModal.value = false;
+};
 </script>
 
 <template>
@@ -27,7 +55,7 @@ const cards = useCards();
       <Skeleton width="8rem" height=".7rem" />
       <Skeleton width="5rem" height=".7rem" style="margin-top: 1rem" />
     </Substrate>
-    <div class="card_board">
+    <div class="card_board" @click="onClickBoard">
       <FieldCell
         v-for="card in cards"
         :cardBackgroundColor="card.color"
@@ -35,6 +63,13 @@ const cards = useCards();
         :key="card.id"
         :draggable="card.dragable"
         :data-key="card.id"
+      />
+      <ModalDialog
+        :card="selectedCard"
+        :isVisible="isOpenModal"
+        @close="onCloseDialog"
+        @confirmDelete="onConfirmDelete"
+        @click.stop
       />
     </div>
   </div>

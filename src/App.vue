@@ -14,7 +14,7 @@ import { deafultCard } from './config';
 import { ICard } from './interfaces';
 import { onMounted, ref } from 'vue';
 
-let cards = useCards();
+let cards = ref<ICard[]>([]);
 
 const selectedCard = ref<ICard>(deafultCard);
 const isOpenModal = ref(false);

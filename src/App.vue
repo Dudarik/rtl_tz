@@ -1,6 +1,35 @@
 <script setup lang="ts">
 import Skeleton from './components/Skeleton.vue';
 import Substrate from './components/Substrate.vue';
+import FieldCell from './components/FieldCell.vue';
+import { ref } from 'vue';
+
+interface ICard {
+  id: number;
+  color: string | null;
+  count: number;
+  dragable: boolean;
+}
+
+const getRandomNumber = (min: number, max: number) =>
+  Math.floor(min + Math.random() * (max - min + 1));
+
+const colors = [null, null, null, null, '#7FAA65', '#AA9765', '#656CAA'];
+
+const getRandomColor = (colors: (string | null)[]) =>
+  colors[getRandomNumber(0, colors.length - 1)];
+
+const cards = ref<ICard[]>(
+  new Array(25).fill(1).map((_, id) => {
+    const color = getRandomColor(colors);
+    return {
+      id,
+      color,
+      count: getRandomNumber(1, 100),
+      dragable: !!color || false,
+    };
+  })
+);
 </script>
 
 <template>
@@ -22,6 +51,16 @@ import Substrate from './components/Substrate.vue';
       <Skeleton width="8rem" height=".7rem" />
       <Skeleton width="5rem" height=".7rem" style="margin-top: 1rem" />
     </Substrate>
+    <div class="card_board">
+      <FieldCell
+        v-for="card in cards"
+        :cardBackgroundColor="card.color"
+        :cardCount="card.count"
+        :key="card.id"
+        :draggable="card.dragable"
+        :data-key="card.id"
+      />
+    </div>
   </div>
 </template>
 
@@ -29,7 +68,6 @@ import Substrate from './components/Substrate.vue';
 @import './assets/styles/const';
 .container {
   display: flex;
-  flex-direction: column;
   gap: 1rem;
   padding: 1rem;
 
@@ -50,6 +88,8 @@ import Substrate from './components/Substrate.vue';
       height: 15rem;
 
       overflow: hidden;
+      //for safari
+      isolation: isolate;
 
       border-radius: $border-radius;
 
@@ -64,6 +104,7 @@ import Substrate from './components/Substrate.vue';
         background-color: transparent;
 
         backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
       }
 
       .profile_image {
@@ -72,6 +113,15 @@ import Substrate from './components/Substrate.vue';
         height: 100%;
       }
     }
+  }
+
+  .card_board {
+    position: relative;
+
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+
+    overflow: hidden;
   }
 }
 </style>

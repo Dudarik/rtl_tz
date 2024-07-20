@@ -2,34 +2,10 @@
 import Skeleton from './components/Skeleton.vue';
 import Substrate from './components/Substrate.vue';
 import FieldCell from './components/FieldCell.vue';
-import { ref } from 'vue';
 
-interface ICard {
-  id: number;
-  color: string | null;
-  count: number;
-  dragable: boolean;
-}
+import { useCards } from './lib';
 
-const getRandomNumber = (min: number, max: number) =>
-  Math.floor(min + Math.random() * (max - min + 1));
-
-const colors = [null, null, null, null, '#7FAA65', '#AA9765', '#656CAA'];
-
-const getRandomColor = (colors: (string | null)[]) =>
-  colors[getRandomNumber(0, colors.length - 1)];
-
-const cards = ref<ICard[]>(
-  new Array(25).fill(1).map((_, id) => {
-    const color = getRandomColor(colors);
-    return {
-      id,
-      color,
-      count: getRandomNumber(1, 100),
-      dragable: !!color || false,
-    };
-  })
-);
+const cards = useCards();
 </script>
 
 <template>

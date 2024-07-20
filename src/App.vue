@@ -30,40 +30,47 @@ const onConfirmDelete = (value: number) => {
 };
 
 const onCloseDialog = () => {
-  console.log('onCloseDilog');
   selectedCard.value = deafultCard;
   isOpenModal.value = false;
 };
 
 const startDrag = (event: DragEvent) => {
-  console.log('startDrag', event);
   selectedCard.value = getSelectedCard(event, cards);
 };
 
 const onDrop = (event: DragEvent) => {
-  const key = event.target.closest('.card_cell').dataset.key;
-  console.log('onDrop', key, selectedCard.value.id);
+  const { target } = event;
+
+  if (!(target instanceof HTMLElement)) return;
+
+  const closestCell = target.closest('.card_cell');
+
+  if (!(closestCell instanceof HTMLElement)) return;
+  const { key } = closestCell.dataset;
+
+  if (!key) return;
+
+  const cellId = parseInt(key);
 
   if (parseInt(key) === selectedCard.value.id) return;
 
   if (
-    cards.value[key].color !== null &&
-    cards.value[key].color !== selectedCard.value.color
+    cards.value[cellId].color !== null &&
+    cards.value[cellId].color !== selectedCard.value.color
   )
     return;
 
-  if (cards.value[key].color === selectedCard.value.color) {
-    cards.value[key].count += selectedCard.value.count;
+  if (cards.value[cellId].color === selectedCard.value.color) {
+    cards.value[cellId].count += selectedCard.value.count;
   }
 
-  if (cards.value[key].color === null)
-    cards.value[key] = { ...selectedCard.value, id: parseInt(key) };
+  if (cards.value[cellId].color === null)
+    cards.value[cellId] = { ...selectedCard.value, id: cellId };
 
   cards.value[selectedCard.value.id] = {
     ...deafultCard,
     id: selectedCard.value.id,
   };
-  console.log(cards.value);
 };
 </script>
 

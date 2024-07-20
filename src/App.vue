@@ -26,6 +26,7 @@ import Substrate from './components/Substrate.vue';
 </template>
 
 <style scoped lang="scss">
+@import './assets/styles/const';
 .container {
   display: flex;
   flex-direction: column;
@@ -50,7 +51,7 @@ import Substrate from './components/Substrate.vue';
 
       overflow: hidden;
 
-      border-radius: 0.5rem;
+      border-radius: $border-radius;
 
       .img_filter {
         position: absolute;
@@ -59,6 +60,7 @@ import Substrate from './components/Substrate.vue';
         right: 0;
         bottom: 0;
         left: 0;
+
         background-color: transparent;
 
         backdrop-filter: blur(5px);

@@ -29,9 +29,7 @@ const onClickClose = () => {
 </template>
 
 <style scoped lang="scss">
-$border-radius: 0.5rem;
-$border-color: #4d4d4d;
-$bg-color: #262626;
+@import '../assets/styles/const';
 
 .substrate {
   position: relative;

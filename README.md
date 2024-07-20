@@ -1,5 +1,17 @@
-# Vue 3 + TypeScript + Vite
+# Описание тестового задания
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+Вам необходимо реализовать веб-приложение - автономно работающий инвентарь, т.е. после закрытия браузера предметы и их позиции должны быть сохранены. По нажатию на предмет инвентаря должна выезжать плашка с его описанием и кнопкой удалить (см. комментарии на фигме)
 
-Learn more about the recommended Project Setup and IDE Support in the [Vue Docs TypeScript Guide](https://vuejs.org/guide/typescript/overview.html#project-setup).
+Стек: Vue 3 composition api, SCSS, Pinia, TypeScript. Нельзя использовать css фреймворки, типа tailwind. Для реализации dragndrop разрешено использовать сторонние библиотеки
+
+Срок выполнения задания: 1 день
+Задание должно быть выложено на GitHub. Инициализируйте репозиторий перед началом выполнения тестового, чтобы репозиторий не состоял из одного коммита
+Дизайн: https://www.figma.com/design/t4whC9HCWE3ZSqefZdnsU8/FrontTest?node-id=0-1&t=VTDFKxAmw319OzkR-1
+
+### New features
+
+- Генерация нового массива карточек.
+- Сортировка карточек.
+- При событии Drop, если цвета совпадают, количество карточек суммируется.
+
+[Деплой на Netlify](https://669b656eec49539bc5b32fbc--musical-alpaca-7e865e.netlify.app/)

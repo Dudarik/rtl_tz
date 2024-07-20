@@ -16,3 +16,5 @@ export const deafultCard: ICard = {
   count: 0,
   dragable: false,
 };
+
+export const LS_KEY_SAVE_STATE = 'rtl_tz_save_state';

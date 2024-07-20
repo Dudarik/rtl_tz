@@ -1,6 +1,6 @@
 import { Ref, ref } from 'vue';
 import { ICard } from '../interfaces';
-import { CARD_COLORS, deafultCard } from '../config';
+import { CARD_COLORS, deafultCard, LS_KEY_SAVE_STATE } from '../config';
 
 const getRandomNumber = (min: number, max: number) =>
   Math.floor(min + Math.random() * (max - min + 1));
@@ -39,4 +39,14 @@ export const getSelectedCard = (event: Event, cards: Ref<ICard[]>) => {
   if (targetCard && targetCard.color) return targetCard;
 
   return deafultCard;
+};
+
+export const saveStateToLS = (state: ICard[]) => {
+  localStorage.setItem(LS_KEY_SAVE_STATE, JSON.stringify(state));
+};
+
+export const loadStateFromLS = () => {
+  const fromLS = localStorage.getItem(LS_KEY_SAVE_STATE);
+  if (fromLS) return JSON.parse(fromLS);
+  return undefined;
 };

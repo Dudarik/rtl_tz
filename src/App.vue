@@ -4,12 +4,17 @@ import Substrate from './components/Substrate.vue';
 import FieldCell from './components/FieldCell.vue';
 import ModalDialog from './components/ModalDialog.vue';
 
-import { getSelectedCard, useCards } from './lib';
+import {
+  getSelectedCard,
+  loadStateFromLS,
+  saveStateToLS,
+  useCards,
+} from './lib';
 import { deafultCard } from './config';
 import { ICard } from './interfaces';
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 
-const cards = useCards();
+let cards = useCards();
 
 const selectedCard = ref<ICard>(deafultCard);
 const isOpenModal = ref(false);
@@ -27,6 +32,7 @@ const onConfirmDelete = (value: number) => {
     return;
   }
   cards.value[selectedCard.value.id].count -= value;
+  saveStateToLS(cards.value);
 };
 
 const onCloseDialog = () => {
@@ -71,7 +77,19 @@ const onDrop = (event: DragEvent) => {
     ...deafultCard,
     id: selectedCard.value.id,
   };
+
+  saveStateToLS(cards.value);
 };
+
+onMounted(() => {
+  const stateFromLS = loadStateFromLS();
+  if (stateFromLS) {
+    cards.value = stateFromLS;
+    return;
+  }
+  cards = useCards();
+  saveStateToLS(cards.value);
+});
 </script>
 
 <template>
@@ -93,6 +111,10 @@ const onDrop = (event: DragEvent) => {
         <Skeleton width="14rem" height="1rem" />
         <Skeleton width="11rem" height="1rem" />
         <Skeleton width="8rem" height="1rem" style="margin-top: 1rem" />
+      </div>
+      <div class="control-btns">
+        <button>Генереровать</button>
+        <button>Сортировать</button>
       </div>
     </Substrate>
     <div
